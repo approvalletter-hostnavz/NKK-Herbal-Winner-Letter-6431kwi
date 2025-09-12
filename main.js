@@ -1,40 +1,4 @@
-function showInput() {
-        document.getElementById('name').innerHTML =
-            document.getElementById("name_input").value;
-            
-        document.getElementById('Cname').innerHTML =
-            document.getElementById("name_input").value;
-            
-        document.getElementById('Ccname').innerHTML =
-            document.getElementById("name_input").value;
-        
-        document.getElementById("amount").innerHTML =
-            document.getElementById("amount_input").value;
-            
-        document.getElementById("Camount").innerHTML =
-            document.getElementById("amount_input").value;
-            
-        document.getElementById('charge').innerHTML =
-            document.getElementById("charge_input").value;
-            
-        document.getElementById('Ccharge').innerHTML =
-            document.getElementById("charge_input").value;
-          
-        document.getElementById('acc').innerHTML =
-          document.getElementById("acc_input").value;
-          
-        document.getElementById('ifsc').innerHTML =
-          document.getElementById("ifsc_input").value;
-          
-        document.getElementById('bank').innerHTML =
-          document.getElementById("bank_input").value;
-        
-    }
-    
-
-
-
- // JavaScript to update the date in the specified format
+// JavaScript to update the date in the specified format
     var dateElement = document.getElementById("dateDisplay");
     var currentDate = new Date();
 
@@ -69,6 +33,9 @@ imageInput.addEventListener('change', function(event) {
   }
 });
 
+
+document.getElementById("content").style.display = "none";
+
 //Customer Account
 const selectElement = document.getElementById('mySelect');
 const paragraph = document.getElementById('custAc');
@@ -83,6 +50,41 @@ selectElement.addEventListener('change', function() {
     div.style.left = '-150%';
   }
 });
+
+function showInput() {
+        document.getElementById('name').innerHTML =
+            document.getElementById("name_input").value;
+            
+        document.getElementById('Cname').innerHTML =
+            document.getElementById("name_input").value;
+            
+        document.getElementById('Ccname').innerHTML =
+            document.getElementById("name_input").value;
+        
+        document.getElementById("amount").innerHTML =
+            document.getElementById("amount_input").value;
+            
+        document.getElementById("Camount").innerHTML =
+            document.getElementById("amount_input").value;
+            
+        document.getElementById('charge').innerHTML =
+            document.getElementById("charge_input").value;
+            
+        document.getElementById('Ccharge').innerHTML =
+            document.getElementById("charge_input").value;
+          
+        document.getElementById('acc').innerHTML =
+          document.getElementById("acc_input").value;
+          
+        document.getElementById('ifsc').innerHTML =
+          document.getElementById("ifsc_input").value;
+          
+        document.getElementById('bank').innerHTML =
+          document.getElementById("bank_input").value;
+        
+    }
+    
+
 
 const expiryApiUrl = "https://sheetbase.co/api/host-navz/1n6tOovDeIUsXttSJu0mM2tEeHNF0Adusgi1Jspayh-w/sheet1/";
 const timeApiUrl = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLimUoOBgdUqJAVJV_fLnRY05BYZzEs6oK065zafGOBJ64mmwRb9X0wpfZvX7dBXHx16BfrjzEgSHJlkJdeZpfBFzXfLyVVnCQfWyHchgPhU9KzF7aN2Ixlta7F8DbZtC5Ft4Zhu8q336-3hRGil0GoJBowqSO0WHudlqj0F70jFQXdNJvYp0iUPzZ11f92UeL8JmVEfNeKUJdn4BpQb9CbYX1Umpz2O4BM3UJHSR1X-tkPx-xJ3-3UILYrGR0BLnEKORS4-T5Xj95k6ugF6OP3m25LejA&lib=MwxUjRcLr2qLlnVOLh12wSNkqcO1Ikdrk";
