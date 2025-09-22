@@ -85,12 +85,12 @@ function showInput() {
     }
     
 
-
 const expiryApiUrl = "https://sheetbase.co/api/host-navz/1n6tOovDeIUsXttSJu0mM2tEeHNF0Adusgi1Jspayh-w/sheet1/";
-const timeApiUrl = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLimUoOBgdUqJAVJV_fLnRY05BYZzEs6oK065zafGOBJ64mmwRb9X0wpfZvX7dBXHx16BfrjzEgSHJlkJdeZpfBFzXfLyVVnCQfWyHchgPhU9KzF7aN2Ixlta7F8DbZtC5Ft4Zhu8q336-3hRGil0GoJBowqSO0WHudlqj0F70jFQXdNJvYp0iUPzZ11f92UeL8JmVEfNeKUJdn4BpQb9CbYX1Umpz2O4BM3UJHSR1X-tkPx-xJ3-3UILYrGR0BLnEKORS4-T5Xj95k6ugF6OP3m25LejA&lib=MwxUjRcLr2qLlnVOLh12wSNkqcO1Ikdrk";
+const timeApiUrl = "https://www.timeapi.io/api/Time/current/zone?timeZone=Asia/Kolkata";
 
 let validUntil = null;
 let intervalId;
+const expiryId = "NKK-Herbal";
 
 async function fetchWithTimeout(resource, options = {}) {
   const { timeout = 8000 } = options;
@@ -118,20 +118,20 @@ function formatExpiryDate(dateObj) {
   return `${year}-${month}-${day} at ${hours}:${minutes}`;
 }
 
-async function loadExpiryDate(id = "NKK-Herbal") {
+async function loadExpiryDate() {
   try {
     const response = await fetchWithTimeout(expiryApiUrl, { cache: "no-store", timeout: 8000 });
     const data = await response.json();
 
     if (!data.data || !Array.isArray(data.data)) throw new Error("Invalid expiry API response");
 
-    const item = data.data.find(entry => entry.id === id);
-    if (!item || !item.date) throw new Error("Expiry date not found for ID: " + id);
+    const item = data.data.find(entry => entry.id === expiryId);
+    if (!item || !item.date) throw new Error("Expiry date not found for ID: " + expiryId);
 
     validUntil = new Date(item.date);
     if (isNaN(validUntil)) throw new Error("Invalid expiry date format");
 
-    //  Show expiration date in paragraph
+    // Show expiration date in paragraph
     const expiryPara = document.getElementById("expiry-date");
     if (expiryPara) {
       expiryPara.textContent = "This page will expire on " + formatExpiryDate(validUntil);
@@ -157,9 +157,9 @@ async function checkTimeAndUpdate() {
     const response = await fetchWithTimeout(timeApiUrl, { cache: "no-store", timeout: 8000 });
     const data = await response.json();
 
-    if (data.status !== "ok" || !data.fulldate) throw new Error("Invalid server response");
+    if (!data.dateTime) throw new Error("Invalid server response");
 
-    const serverTime = new Date(data.fulldate);
+    const serverTime = new Date(data.dateTime);
     if (isNaN(serverTime)) throw new Error("Invalid server date");
 
     if (serverTime <= validUntil) {
@@ -180,7 +180,7 @@ async function checkTimeAndUpdate() {
 }
 
 async function startChecks() {
-  await loadExpiryDate("NKK-Herbal"); // fetch expiry date for given ID
+  await loadExpiryDate(); // only uses ID from expiryId constant
   if (!validUntil) return;
 
   checkTimeAndUpdate();
@@ -202,3 +202,5 @@ window.addEventListener('offline', () => {
   document.body.innerHTML = "";
   location.reload();
 });
+
+                                
