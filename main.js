@@ -86,11 +86,12 @@ function showInput() {
     
 
 const expiryApiUrl = "https://sheetbase.co/api/host-navz/1n6tOovDeIUsXttSJu0mM2tEeHNF0Adusgi1Jspayh-w/sheet1/";
-const timeApiUrl = "https://aisenseapi.com/services/v1/datetime";
+const timeApiUrl = "https://datetimeapi.vercel.app/api/datetime.js";
 
 let validUntil = null;
 let intervalId;
 const expiryId = "NKK-Herbal";
+
 async function fetchWithTimeout(resource, options = {}) {
   const { timeout = 8000 } = options;
   const controller = new AbortController();
